@@ -1,5 +1,6 @@
 import {
   Box,
+  Image,
   Flex,
   Heading,
   Stack,
@@ -117,31 +118,42 @@ const Movie = (props) => {
   return (
     <Flex
       w="full"
-      px="24px"
-      py="16px"
       bgColor="white"
       borderRadius="md"
-      justify="space-between"
-      align="center"
       boxShadow="sm"
+      direction="column"
     >
-      <Box>
-        <Text fontWeight="semibold" isTruncated>
-          {props.item.title}
-        </Text>
-        <Text color="gray.400" fontSize="xs" isTruncated>
-          {dayjs(props.item.release_date).format("YYYY")}
-        </Text>
+      <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+        <Image
+          src={"https://image.tmdb.org/t/p/w500/" + props.item.poster_path}
+          alt={props.item.title}
+        />
+        <Box p="3">
+          <Box
+            mt="1"
+            fontWeight="semibold"
+            as="h4"
+            lineHeight="tight"
+            isTruncated
+          >
+            <Text fontWeight="semibold" isTruncated>
+              {props.item.title}
+            </Text>
+            <Text color="gray.400" fontSize="xs" isTruncated>
+              {dayjs(props.item.release_date).format("YYYY")}
+            </Text>
+          </Box>
+        </Box>
+        <IconButton
+          variant="ghost"
+          colorScheme="pink"
+          icon={isAddedToWishlist ? <RiHeartFill /> : <RiHeartLine />}
+          aria-label="edit"
+          _focus={{ outline: "none" }}
+          isRound
+          onClick={() => setIsAddedToWishlist(!isAddedToWishlist)}
+        />
       </Box>
-      <IconButton
-        variant="ghost"
-        colorScheme="pink"
-        icon={isAddedToWishlist ? <RiHeartFill /> : <RiHeartLine />}
-        aria-label="edit"
-        _focus={{ outline: "none" }}
-        isRound
-        onClick={() => setIsAddedToWishlist(!isAddedToWishlist)}
-      />
     </Flex>
   );
 };
