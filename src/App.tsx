@@ -124,9 +124,18 @@ const Movie = (props) => {
       direction="column"
     >
       <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-        <Image
-          src={"https://image.tmdb.org/t/p/w500/" + props.item.poster_path}
-          alt={props.item.title}
+        <Box
+          pos="relative"
+          pt="140%"
+          background="#f3f3f3"
+          backgroundImage={
+            "url('https://image.tmdb.org/t/p/w500/" +
+            props.item.poster_path +
+            "')"
+          }
+          backgroundSize="cover"
+          backgroundPosition="top center"
+          backgroundRepeat="no-repeat"
         />
         <Box p="3">
           <Box
