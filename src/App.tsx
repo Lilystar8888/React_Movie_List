@@ -109,7 +109,7 @@ import axios from "axios";
 
 const api_key = "ba9e9eb1cba46fa2c366ab90f70a5dbe";
 
-const Movie = () => {
+const Movie = (props) => {
   const [isAddedToWishlist, setIsAddedToWishlist] = useState(false);
 
   return (
@@ -125,7 +125,7 @@ const Movie = () => {
     >
       <Box>
         <Text fontWeight="semibold" isTruncated>
-          Movie Title
+          {props.item.title}
         </Text>
         <Text color="gray.400" fontSize="xs" isTruncated>
           2022
@@ -167,7 +167,7 @@ const App = () => {
     });
 
   let move_list = MovieList.map((item, index) => {
-    return <Movie key={index} />;
+    return <Movie key={index} item={item} />;
   });
 
   return (
