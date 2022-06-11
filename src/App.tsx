@@ -31,6 +31,8 @@ import {
   RiSearchLine
 } from "react-icons/ri";
 
+import axios from "axios";
+
 /*
 ## 需求：
   - 電影列表：
@@ -105,6 +107,8 @@ import {
   - Refactor components
 */
 
+const api_key = "ba9e9eb1cba46fa2c366ab90f70a5dbe";
+
 const Movie = () => {
   const [isAddedToWishlist, setIsAddedToWishlist] = useState(false);
 
@@ -142,6 +146,29 @@ const Movie = () => {
 
 const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [MovieList, setMovieList] = useState([]);
+
+  //Get Popular
+  axios
+    .get(
+      "https://api.themoviedb.org/3/movie/popular?api_key=" +
+        api_key +
+        "&language=en-US&page=1"
+    )
+    .then((res) => {
+      console.log("res", res);
+      if (res.data) {
+        setMovieList(res.data.results);
+      }
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
+
+  let move_list = MovieList.map((item, index) => {
+    return <Movie key={index} />;
+  });
 
   return (
     <Box bgColor="#f3f3f3" h="100vh">
@@ -207,7 +234,7 @@ const App = () => {
           overflowY="auto"
           spacing="8px"
         >
-          <Movie />
+          {move_list}
 
           {/* ----- Load More Button UI (Bonus) ------ */}
           {/* <Center>
