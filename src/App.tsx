@@ -32,7 +32,7 @@ import {
 } from "react-icons/ri";
 
 import axios from "axios";
-
+import dayjs from "dayjs";
 /*
 ## 需求：
   - 電影列表：
@@ -128,7 +128,7 @@ const Movie = (props) => {
           {props.item.title}
         </Text>
         <Text color="gray.400" fontSize="xs" isTruncated>
-          2022
+          {dayjs(props.item.release_date).format("YYYY")}
         </Text>
       </Box>
       <IconButton
