@@ -31,6 +31,8 @@ import {
   RiSearchLine
 } from "react-icons/ri";
 
+import { useMediaQuery } from "react-responsive";
+
 import axios from "axios";
 import dayjs from "dayjs";
 /*
@@ -148,6 +150,9 @@ const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [MovieList, setMovieList] = useState([]);
+  const isMobile = useMediaQuery({
+    query: "(max-width: 995px)"
+  });
 
   //Get Popular
   axios
@@ -233,6 +238,7 @@ const App = () => {
           flex={1}
           overflowY="auto"
           spacing="8px"
+          direction={["column", "row"]}
         >
           {move_list}
 
